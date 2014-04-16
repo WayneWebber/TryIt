@@ -5,7 +5,7 @@ module.exports = function(app) {
   app.post('/create', function createTodo(req, res) {
     new Todo({
       content   : req.body.content,
-        update_at : Date.now()
+        updated_at : Date.now()
     }).save( function(err, todo, count) {
         res.redirect('/');
     });
@@ -13,7 +13,7 @@ module.exports = function(app) {
   app.get('/', function index(req, res) {
     Todo.
     find().
-    sort('-update_at').
+    sort('-updated_at').
     exec(function (err, todos, count) {
       res.render('index', {
         title : 'Express Todo Example',
@@ -31,7 +31,7 @@ module.exports = function(app) {
   app.get('/edit/:id', function editTodo(req, res) {
     Todo.
     find().
-    sort('-update_at').
+    sort('-updated_at').
     exec(function(err, todos) {
       res.render('edit', {
         title   : 'Express Todo Example',
@@ -43,7 +43,7 @@ module.exports = function(app) {
   app.post('/update', function updateTodo(req, res) {
      Todo.findById(req.body.todoid, function(err, todo) {
         todo.content = req.body.content;
-        todo.update_at = Date.now();
+        todo.updated_at = Date.now();
         todo.save( function(err, todo, count) {
             if(err) return next(err);
             res.redirect('/');

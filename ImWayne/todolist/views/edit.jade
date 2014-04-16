@@ -21,6 +21,6 @@ block content
                 input.btn.btn-default(type="submit", value="edit this", style="margin-left:20px")
             else
                 a(href="/edit/#{todo.id}", title="update this todo item") #{todo.content}
-          td #{todo.update_at}
+          td #{todo.updated_at}
           td
             a(href="/destroy/#{todo.id}", titile="Delete this todo item") Delete

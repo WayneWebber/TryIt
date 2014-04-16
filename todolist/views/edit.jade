@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  br
+  br
+  table.table
+    tr
+      th Content
+      th Update at
+      th Deltete this
+
+      for todo in todos
+        tr
+          td
+            if todo.id == current
+              form(action="/update", method="post", accept-charset="utf-8")
+                input(type='hidden', name='todoid', value="#{todo.id}")
+                input(type='text', name='content', value="#{todo.content}")
+                input.btn.btn-default(type="submit", value="edit this", style="margin-left:20px")
+            else
+                a(href="/edit/#{todo.id}", title="update this todo item") #{todo.content}
+          td #{todo.updated_at}
+          td
+            a(href="/destroy/#{todo.id}", titile="Delete this todo item") Delete

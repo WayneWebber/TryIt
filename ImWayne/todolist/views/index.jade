@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  div(style="margin-left:20px")
+    h1 #{title}
+    form(action='/create', method='post', accept-charset='utf-8')
+        input(type='text', name='content', placeholder='Enter Todo')
+        input.btn.btn-default(type="submit", value="新增待辦事項", style="margin-left:20px")
+
+  br
+  br
+  table.table
+    tr
+      th Content
+      th Update at
+      th Deltete this
+    for todo in todos
+      tr
+        td
+            a(href="/edit/#{todo.id}", title="Update this todo item") #{todo.content}
+        td #{todo.update_at}
+        td
+            a(href="/destroy/#{todo.id}", title="Delete this todo item") Delete

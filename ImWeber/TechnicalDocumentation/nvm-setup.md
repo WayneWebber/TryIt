@@ -1,10 +1,9 @@
-
 安裝 NVM 來管理你的 Nodejs
 =========================
 
     此安裝法適用於ubuntu
 
-![Build Status](/ImWeber/TechnicalDocumentation/img/logo.png)
+![鳩咪](/ImWeber/TechnicalDocumentation/img/logo.png)
 
 
 ## Install script
@@ -74,3 +73,5 @@ $ nvm ls-remote
 
 參考網址
 ========
+
+[NVM官方](https://github.com/creationix/nvm)

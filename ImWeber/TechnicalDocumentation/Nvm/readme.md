@@ -3,7 +3,7 @@
 
     此安裝法適用於ubuntu
 
-![鳩咪](/ImWeber/TechnicalDocumentation/img/logo.png)
+![鳩咪](/ImWeber/TechnicalDocumentation/Nvm/img/logo.png)
 
 
 ## Install script

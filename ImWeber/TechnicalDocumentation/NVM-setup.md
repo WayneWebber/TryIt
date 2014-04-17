@@ -10,11 +10,15 @@
 
 要安裝使用 curl [install script](https://github.com/creationix/nvm/blob/v0.4.0/install.sh):
 
-    curl https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh
+```bash
+$ curl https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh
+```
 
 或是 Wget:
 
-    wget -qO- https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh
+```bash
+$ wget -qO- https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh
+```
 
 檔案會存在 `~/.nvm`
 

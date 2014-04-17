@@ -1,10 +1,11 @@
 
-![Build Status](/img/logo.png)
+安裝 NVM 來管理你的 Nodejs
+=========================
 
     此安裝法適用於ubuntu
 
-安裝 NVM 來管理你的 Nodejs
-=========================
+![Build Status](/ImWeber/TechnicalDocumentation/img/logo.png)
+
 
 ## Install script
 
@@ -57,7 +58,6 @@ $ nvm alias default v0.10.26
 $ nvm use v0.11.12
 or
 $ nvm use default
-
 ```
 
 運行指令檢查所有`node`版本:

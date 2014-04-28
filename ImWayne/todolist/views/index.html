@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">  
+    <title>{{title}}</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+  </head>
+  <body ng-controller="TodoCrtlUpdate">
+      <h1>Todo List</h1>
+    <form ng-submit="addItem()" action="/create" , method="post">
+        <input type="text" ng-model="newItem" name="newItem" required="required"/>
+        <input type="submit" id="submit" value="新增待辦事項" />
+      </form>
+    
+      <ul id="todo">
+      	<!-- <li ng-repeat="test in todos">{{test.content}}</li> -->
+        <li ng-repeat="item in todoList  ">
+          <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.content }} ~~~~~~~~~~~~~~~~~{{item._id}}</span></div>
+          <div ng-show="item.editing"><input type="text" value="{{item.content }}" ng-model="item.content"><button ng-click="save(item)">儲存</button></div>
+        </li>
+      </ul>
+ 
+      <hr>
+ 
+      <!-- <h1>Finished!</h1>  
+      <ul id="finish">
+        <li ng-repeat="item in todoList | filter:{isFinish:true}">
+          {{item.content}}
+        </li>
+      </ul> -->
+  </body>
+</html>

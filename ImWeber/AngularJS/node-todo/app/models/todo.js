@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Todo', {
-	text : String,
-	done : Boolean
+module.exports = mongoose.model('wb_todo', {
+  text : String,
+  done : Boolean,
+  update : Number
 });

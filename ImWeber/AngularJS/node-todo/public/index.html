@@ -17,6 +17,7 @@
     #todo-list        { margin-bottom:30px; }
     #todo-form        { margin-bottom:50px; }
     .navbar-inverse .topTitle{color:#fff;}
+    .bs-callout-warning{border-left: 8px solid #f0ad4e;}
   </style>
 
   <!-- SPELLS -->
@@ -38,19 +39,19 @@
   </div>
   <div class="container">
     <div>
-     <span>{{ aaa | date:'MM月dd日 h:mm:ss a'}}</span><br>
+     <span>{{ aaa | date:'MM月dd日 h:mm:ss a'}}</span><br><br>
     </div>
     <div id="todo-list" class="row">
 
       <table class="table table-hover">
         <tr>
-          <th>#</th>
+          <th style="width:15px;"><span style="color:#d9534f;">X</span></th>
+          <th style="width:85px;" class="bs-callout-warning">日期</th>
           <th>待辦事項</th>
-          <th>Last Name</th>
         </tr>
         <tr ng-repeat="todo in todos">
           <td><input type="checkbox" ng-click="deleteTodo(todo._id)"></td>
-          <td>{{ todo.text }}</td>
+          <td class="bs-callout-warning">{{ todo.update | date:'M/d EEE' }}</td>
           <td>{{ todo.text }}</td>
         </tr>
       </table>
@@ -58,11 +59,13 @@
 
 
         <!-- LOOP OVER THE TODOS IN $scope.todos -->
+<!--
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
             <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
           </label>
         </div>
+-->
 
         <p class="text-center" ng-show="loading">
           <img src="http://preloaders.net/preloaders/131/3D%20snake.gif" />

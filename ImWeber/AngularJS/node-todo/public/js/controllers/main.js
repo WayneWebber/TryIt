@@ -48,7 +48,7 @@ angular.module('todoController', [])
         });
     };
 
-    // Date ---------------------------
+    // Datetime ---------------------------
         $scope.counter = 0;
         $scope.onTimeout = function(){
             $scope.counter++;
@@ -56,12 +56,4 @@ angular.module('todoController', [])
             mytimeout = $timeout($scope.onTimeout,1000);
         };
         var mytimeout = $timeout($scope.onTimeout,1000);
-
-    //~ var counter = 0,a;
-    //~ setInterval(function(){
-        //~ $scope.aaa = new Date().getTime();
-        //~ console.log($scope.aaa)
-        //~ counter++;
-    //~ }, 500);
-    //~ console.log($scope.aaa)
   });

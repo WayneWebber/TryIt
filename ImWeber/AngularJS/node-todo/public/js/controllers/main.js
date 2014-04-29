@@ -1,7 +1,7 @@
 angular.module('todoController', [])
 
   // inject the Todo service factory into our controller
-  .controller('mainController', function($scope, $http, Todos) {
+  .controller('mainController', function($scope, $http, Todos, $timeout) {
     $scope.formData = {};
     $scope.loading = true;
 
@@ -47,4 +47,21 @@ angular.module('todoController', [])
           $scope.todos = data; // assign our new list of todos
         });
     };
+
+    // Date ---------------------------
+        $scope.counter = 0;
+        $scope.onTimeout = function(){
+            $scope.counter++;
+            $scope.aaa = new Date().getTime();
+            mytimeout = $timeout($scope.onTimeout,1000);
+        };
+        var mytimeout = $timeout($scope.onTimeout,1000);
+
+    //~ var counter = 0,a;
+    //~ setInterval(function(){
+        //~ $scope.aaa = new Date().getTime();
+        //~ console.log($scope.aaa)
+        //~ counter++;
+    //~ }, 500);
+    //~ console.log($scope.aaa)
   });

@@ -23,7 +23,8 @@ module.exports = function(app) {
     // create a todo, information comes from AJAX request from Angular
     Todo.create({
       text : req.body.text,
-      done : false
+      done : false,
+      update : Date.now()
     }, function(err, todo) {
       if (err)
         res.send(err);
@@ -56,7 +57,7 @@ module.exports = function(app) {
   });
 
   // application -------------------------------------------------------------
-  app.get('*', function(req, res) {
+  app.get('/', function(req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
   });
 };

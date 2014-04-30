@@ -8,9 +8,18 @@ var server = connect(
 
 var data = [
     {text:'learn angular', done:true},
+    {text:'learn angular', done:true},
+    {text:'learn angular', done:true},
+    {text:'learn angular', done:true},
     {text:'build an angular app', done:false}];
 
 var io = socketio.listen(server);
+
+/***資料庫****/
+var mongoose = require('mongoose');
+var database = require('./config/database');
+
+
 io.sockets.on('connection', function(socket) {
 
   socket.emit('change', data);

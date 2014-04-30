@@ -7,6 +7,7 @@ var Todo = new Schema({
     updated_at : Date
 });
  
-mongoose.model('Todo', Todo);
+mongoose.model('wayne_Todo', Todo);
  
 mongoose.connect('mongodb://localhost/express-todo');
+// mongoose.connect('mongodb://tryit:12345678@10.7.10.89:27017/WW');

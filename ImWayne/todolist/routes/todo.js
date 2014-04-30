@@ -4,7 +4,7 @@ var Todo     = mongoose.model('Todo');
 module.exports = function(app) {
   app.post('/create', function createTodo(req, res) {
     new Todo({
-      content   : req.body.content,
+        content   : req.body.content,
         updated_at : Date.now()
     }).save( function(err, todo, count) {
         res.redirect('/');

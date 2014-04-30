@@ -2,9 +2,11 @@
 <html ng-app>
   <head>
     <meta charset="utf-8">  
-    <title>{{title}}</title>
+    <title>AngularJS</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
     <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="bower_components/socket.io-client/dist/socket.io.min.js"></script>
+    
   </head>
   <body ng-controller="TodoCrtlUpdate">
       <h1>Todo List</h1>
@@ -16,7 +18,7 @@
       <ul id="todo">
       	<!-- <li ng-repeat="test in todos">{{test.content}}</li> -->
         <li ng-repeat="item in todoList  ">
-          <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.content }} ~~~~~~~~~~~~~~~~~{{item._id}}</span></div>
+          <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.content }} ~~~~~~~~{{ item.updated_at | date:'yyyy年M月dd日 EEE h:mma '}}~~~~~~~~~{{item._id}}</span></div>
           <div ng-show="item.editing"><input type="text" value="{{item.content }}" ng-model="item.content"><button ng-click="save(item)">儲存</button></div>
         </li>
       </ul>
@@ -30,4 +32,12 @@
         </li>
       </ul> -->
   </body>
+  <script>
+  var socket = io.connect();
+  // console.dir(socket);
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
 </html>

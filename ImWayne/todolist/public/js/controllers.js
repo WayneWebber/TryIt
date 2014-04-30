@@ -36,7 +36,10 @@ function TodoCrtlUpdate($scope, $http) {
   $scope.todoList = [];
   $http.get('/ca')
     .success(function(data) {
+      var timeconvert = data[0].updated_at;
+      console.log(timeconvert)
       $scope.todoList = data;
+      
     })
     .error(function(data) {
       console.log('Error: ' + data);

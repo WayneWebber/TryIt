@@ -19,7 +19,7 @@ var io = socketio.listen(server);
 var mongoose = require('mongoose');
 var database = require('./config/database');
 
-
+/***/
 io.sockets.on('connection', function(socket) {
 
   socket.emit('change', data);

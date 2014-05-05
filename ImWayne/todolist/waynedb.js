@@ -9,5 +9,5 @@ var Todo = new Schema({
  
 mongoose.model('wn_Todo', Todo);
  
-// mongoose.connect('mongodb://localhost/wayne-todo');
-mongoose.connect('mongodb://tryit:12345678@10.7.10.89:27017/WW')
+mongoose.connect('mongodb://localhost/wayne-todo');
+// mongoose.connect('mongodb://tryit:12345678@10.7.10.89:27017/WW')

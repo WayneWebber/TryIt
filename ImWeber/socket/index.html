@@ -1,0 +1,30 @@
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect();
+  function sc(data, ){
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
+  }
+
+</script>
+<div id="chat" style="width:600px;height:300px;border:1px solid #ccc;"></div>
+<input type="text" id="text" value="123"/>
+<input type="button" id="btn" value="送出"/>
+<script>
+  $('#btn').on('click',function(){
+    var val = $("#text").val();
+    var text = $("#chat").html();
+
+    if (''===text){
+      $("#chat").html(text+val);
+    }else if (''==val){
+      $("#chat").html(text)
+    }else{
+      $("#chat").html(text+'<br>'+val)
+    }
+  })
+
+</script>

@@ -46,7 +46,7 @@ function TodoCtrl($scope) {
         // console.log(todo);
         // console.log(todo)
         socket.emit('change2', todo);
-        // window.location = '/';
+        window.location = '/';
         console.log(todo)
       }
     });

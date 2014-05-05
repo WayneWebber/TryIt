@@ -51,9 +51,15 @@ io.sockets.on('connection', function(socket) {
      // console.log(docs);
      // console.log('remove success');
      data = obj;
-     console.log(data)
-     socket.broadcast.emit('change', data);
+     // console.log(data)
+
      console.log('刪除success')
+  });
+
+    Todo.find(function(err, todo, count) {
+    // data = todo;
+   socket.broadcast.emit('change', todo);
+    console.log('step3')
   });
     // console.log(obj);
     // data = obj;

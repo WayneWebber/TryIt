@@ -11,9 +11,10 @@ function TodoCtrl($scope) {
   });
 
   $scope.addTodo = function() {
-    $scope.todos.push({text:$scope.todoText, done:false});
+    $scope.todos.push({text:$scope.todoText, done:false, updated_at:Date.now(), id:Date.now()});
     $scope.todoText = '';
     socket.emit('change', $scope.todos);
+    console.log($scope.todos)
   };
 
   $scope.remaining = function() {
@@ -32,29 +33,34 @@ function TodoCtrl($scope) {
       if (!todo.done) $scope.todos.push(todo);
     });
     socket.emit('change', $scope.todos);
-    // console.log($scope.todos)
   };
 
   $scope.change = function() {
-   var oldTodos = $scope.todos;
-    // $scope.todos = [];
-
+    var oldTodos = $scope.todos;
+    $scope.todos = [];
+    console.log($scope.todos)
     angular.forEach(oldTodos, function(todo) {
 
-      if (todo.done) {
-        // $scope.todos.push(todo);
-        // console.log(todo);
-        // console.log(todo)
-        socket.emit('change2', todo);
-        window.location = '/';
+      if (!todo.done) {
+        $scope.todos.push(todo);
+
+        // window.location = '/';
         console.log(todo)
+      }else{
+
+        socket.emit('change2', todo);
       }
     });
-    // console.log($scope.todos.length)
-    // socket.emit('change2', todo);
 
-    // console.log($scope.todos)
-     // console.log($scope.todos[0]._id)
-    // console.log('change status')
+  };
+  $scope.edit = function(todo){
+     todo.editing = true;
+
+  };
+  $scope.save = function(todo){
+   todo.editing = false;
+   todo.updated_at = Date.now();
+   socket.emit('change3', todo);
+   // window.location = '/';
   };
 }

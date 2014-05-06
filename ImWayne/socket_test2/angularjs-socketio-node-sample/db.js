@@ -6,7 +6,8 @@ var Todo = new Schema({
 
     text    : String,
     updated_at : Number,
-    done       : Boolean
+    done       : Boolean,
+    id         : String
 });
 
 mongoose.model('wn_Todo_socket', Todo);

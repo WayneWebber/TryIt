@@ -1,19 +1,15 @@
-var app = require('http').createServer(handler)
-	,io = require('socket.io').listen(app)
-	,fs = require('fs');
+var	express = require('express') 
+	,app = express()
+	,server = require('http').createServer(app)
+	,io = require('socket.io').listen(server);
 
-app.listen(8124);
+server.listen(9478);
 
-function handler (req, res){
-	fs.readFile(__dirname + '/chat.html', function(err, data){
-		if (err){
-			res.writeHead(500);
-			return res.end('Error loading chat.html');
-		}
-		res.writeHead(200);
-		res.end(data);
-	});
-}
+
+// route.js
+var route = require('./app/route.js');
+
+app.get('/', route.chat);
 
 io.sockets.on('connection', function(socket){
 	socket.on('addme', function(username){
@@ -24,8 +20,6 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('sendchat', function(data){
 		io.sockets.emit('chat', socket.username, data);
-		console.log(socket.username)
-		console.log(data)
 	});
 
 	socket.on('disconnect', function(){

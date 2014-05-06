@@ -3,9 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Chat Room</title>
-	<script src="http://10.7.10.89:8124/socket.io/socket.io.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script>
-		var socket = io.connect('http://10.7.10.89:8124');
+		var socket = io.connect('http://10.7.10.89:9478');
 		socket.on('connect', function(){
 			socket.emit('addme', prompt('Who are you?'));
 		});

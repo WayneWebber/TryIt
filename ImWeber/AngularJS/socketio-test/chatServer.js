@@ -24,6 +24,8 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('sendchat', function(data){
 		io.sockets.emit('chat', socket.username, data);
+		console.log(socket.username)
+		console.log(data)
 	});
 
 	socket.on('disconnect', function(){

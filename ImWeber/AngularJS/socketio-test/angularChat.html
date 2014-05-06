@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
 	<meta charset="utf-8">
 	<title>Chat Room</title>
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
+	<script src="http://10.7.10.89:8124/socket.io/socket.io.js"></script>
+	<script src="js/core.js"></script>
+	<script src="js/model.js"></script>
+	<script src="js/controller.js"></script>
 	<script>
-		var socket = io.connect('http://10.7.10.89:9478');
+		var socket = io.connect('http://10.7.10.89:8124');
 		socket.on('connect', function(){
 			socket.emit('addme', prompt('Who are you?'));
 		});
@@ -22,7 +26,7 @@
 		}, false);
 	</script>
 </head>
-<body>
+<body ng-controller="TheSocket">
 	<div id="output">
 		
 	</div>

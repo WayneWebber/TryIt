@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "socket.io": "~0.9.6",
-    "connect": "~2.3.3"
+    "connect": "~2.3.3",
+    "express": "~3.0.0"
   },
   "devDependencies": {},
   "optionalDependencies": {},

@@ -7,25 +7,25 @@ module.exports = function(app) {
       content   : req.body.newItem,
       updated_at : Date.now()
     }).save( function(err, todo, count) {
-        if(err) return next(err);
+        if(err) return next(err);console.log(456)
     });
     res.redirect('/');
   });
-  // app.get('/', function index(req, res) {
-  //   Todo.
-  //   find().
-  //   sort('-updated_at').
-  //   exec(function (err, todos, count) {
+  app.get('/', function index(req, res) {
+    Todo.
+    find().
+    sort('-updated_at').
+    exec(function (err, todos, count) {
 
-  //     // console.log(todos)
-  //     res.render('index', {
-  //         title : 'Express Todo Example',
-  //         todos : todos
-  //       });
-  //     // res.json(todos)
-  //     // console.log(todos[2].content)
-  //   });
-  // });
+      // console.log(todos)
+      res.render('index', {
+          title : 'Express Todo Example',
+          todos : todos
+        });
+      // res.json(todos)
+      // console.log(todos[2].content)
+    });
+  });
   app.get('/ca', function index(req, res) {
     Todo.
     find().

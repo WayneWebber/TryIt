@@ -20,16 +20,14 @@
     <h2>Todo</h2>
     <div ng-controller="TodoCtrl">
       <span>{{remaining()}} of {{todos.length}} remaining</span>
-      <!-- [ <a href="" ng-click="archive()">archive</a> ] -->
+      [ <a href="" ng-click="archive()">archive</a> ]
       <ul class="unstyled">
-        <li ng-repeat="todo in todos">{{todo.updated_at | date:'yyyy年M月dd日 EEE h:mma '}}
-          <div ng-hide="todo.editing"><input type="checkbox" ng-model="todo.done" ng-change="change()">
-          <span class="done-{{todo.done}}"><span ng-dblclick="edit(todo)">{{todo.text}}</span></span></div>
-           <div ng-show="todo.editing"><input type="checkbox" ng-model="todo.done" ng-change="change()">
-          <span class="done-{{todo.done}}" ><input type="text"  ng-model="todo.text"></span><button ng-click="save(todo)">儲存</button></div>
+        <li ng-repeat="todo in todos">
+          <input type="checkbox" ng-model="todo.done" ng-change="change()">
+          <span class="done-{{todo.done}}">{{todo.text}}</span>
         </li>
       </ul>
-      <form ng-submit="addTodo()" >
+      <form ng-submit="addTodo()">
         <input type="text" ng-model="todoText"  size="30"
                placeholder="add new todo here">
         <input class="btn-primary" type="submit" value="add">

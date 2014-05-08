@@ -18,7 +18,7 @@
       <ul id="todo">
       	<!-- <li ng-repeat="test in todos">{{test.content}}</li> -->
         <li ng-repeat="item in todoList  ">
-          <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.content }} ~~~~~~~~{{ item.updated_at | date:'yyyy年M月dd日 EEE h:mma '}}~~~~~~~~~{{item._id}}</span></div>
+          <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.content }} ~~~~~~~~{{ item.updated_at | date:'yyyy年M月dd日 EEE h:mma '}}</span></div>
           <div ng-show="item.editing"><input type="text" value="{{item.content }}" ng-model="item.content"><button ng-click="save(item)">儲存</button></div>
         </li>
       </ul>

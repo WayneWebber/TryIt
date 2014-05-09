@@ -10,7 +10,7 @@ var macbook_pro13 = 'http://store.apple.com/tw/browse/home/specialdeals/mac/macb
 var macbook_pro15 = 'http://store.apple.com/tw/browse/home/specialdeals/mac/macbook_pro/15';
 var mac = 'http://store.apple.com/tw/browse/home/specialdeals/clearance/mac';
 
-var html,pro13,pro15,air11,air13;
+var html,pro13 = {},pro15 = {},air11 = {},air13 = {};
 var head = '<div class="header">'
       +'<a href="http://store.apple.com/tw/browse/home/specialdeals/mac">MAC官網</a>'
       +'<a href="http://store.apple.com/tw/browse/home/specialdeals/mac/macbook_air">macAir</a>'
@@ -56,8 +56,8 @@ var css = '<style>'
 //   res.send( css + head + pro13 + pro15 + air11 + air13  );
 // });
 
-app.listen(3000);
-console.log('is run 3000')
+
+
 var i = 0; 
 setInterval(function(){ 
   console.log('count: %s', i);
@@ -67,16 +67,28 @@ function macData(url, target, title){
   request({ url: url}, function(err, resp, body) {
     if (!err && resp.statusCode == 200) {
       var $ = cheerio.load(body);
-      target = '<h2>'+ title +'</h2>' + $('.box-content').html() + '<div style="clear:left"></div>';
-      return target;
+      target.html = '<h2>'+ title +'</h2>' + $('.box-content').html() + '<div style="clear:left"></div>';
     }
   });
 }
 
 var intervalId = setInterval(function(){ 
+  macData(macbook_air11, air11, 'Air11');
   macData(macbook_air13, air13, 'Air13');
-  console.log(air13);
+  macData(macbook_pro13, pro13, 'Pro13');
+  macData(macbook_pro15, pro15, 'Pro15');
   app.get('/', function(req, res){
-    res.send( css + head + air13  );
+    res.send( css + head + air11.html + air13.html + pro13.html + pro15.html   );
   });
-},10000);
+},360000);
+setTimeout(function(){ 
+  macData(macbook_air11, air11, 'Air11');
+  macData(macbook_air13, air13, 'Air13');
+  macData(macbook_pro13, pro13, 'Pro13');
+  macData(macbook_pro15, pro15, 'Pro15');
+  app.get('/', function(req, res){
+    res.send( css + head + air11.html + air13.html + pro13.html + pro15.html   );
+  });
+  app.listen(3000);
+  console.log('is run 3000');
+}, 1000);

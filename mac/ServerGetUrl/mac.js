@@ -30,7 +30,8 @@ var css = '<style>'
       +'</style>'; 
 
 function macData(url, target, title){
-  request({ url: url}, function(err, resp, body) {
+  request({ url: 
+    url}, function(err, resp, body) {
     if (!err && resp.statusCode == 200) {
       var $ = cheerio.load(body);
       target.html = '<h2>'+ title +'</h2>' + $('.box-content').html() + '<div style="clear:left"></div>';
@@ -48,10 +49,10 @@ var intervalId = setInterval(function(){
   });
 },360000);
 setTimeout(function(){ 
-  macData(macbook_air11, air11, 'Air11');
-  macData(macbook_air13, air13, 'Air13');
-  macData(macbook_pro13, pro13, 'Pro13');
-  macData(macbook_pro15, pro15, 'Pro15');
+  macData(macbook_air11, air11, 'Air11', function(a){ if( undefined === a.html ){console.log(123)}else{return a}});
+  macData(macbook_air13, air13, 'Air13', function(a){ if( undefined === a.html ){console.log(123)}else{return a}});
+  macData(macbook_pro13, pro13, 'Pro13', function(a){ if( undefined === a.html ){console.log(123)}else{return a}});
+  macData(macbook_pro15, pro15, 'Pro15', function(a){ if( undefined === a.html ){console.log(123)}else{return a}});
   app.get('/', function(req, res){
     res.send( css + head + air11.html + air13.html + pro13.html + pro15.html );
   });

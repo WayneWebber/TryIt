@@ -1,0 +1,35 @@
+<!doctype html>
+<html debug="true" lang="zh_tw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<title>表單</title>
+<script>
+  $("#exportExcel").click(function(){
+    console.info("exportExcel");
+    var id = $("#contractID").val();
+    console.info("id:"+id);
+    var url =  "/api/contracts/exportExcel/" + id;
+    console.info(url);
+    window.location = url;
+</script>
+</head>
+<body>
+<header id="header">
+</header>
+<article id="page-content">
+<section>
+<h2>測試form表單！</h2>
+<button id="exportExcel" class="btn btn-warning">excel導出</button>
+</section>
+<aside>
+</aside>
+</article>
+</body>
+<footer>
+</footer>
+</html>
+
+
+
+

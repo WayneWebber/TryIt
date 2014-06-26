@@ -1,0 +1,36 @@
+<!doctype html>
+<html debug="true" lang="zh_tw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<title>表單</title>
+</head>
+<body>
+<header id="header">
+</header>
+<article id="page-content">
+<section>
+<h2>表單</h2>
+<form action="/redirect" method="post">
+  姓名：<input type='text' required name="name"><br>
+  身分證字號：<input type='text' required name="id"><br>
+  手機號碼：<input type='text' required name="tel"><br>
+  地址：<input type='text' required name="add"><br>
+  email：<input type='text' required name="mail"><br>
+  bingo:
+  <a href="#" onclick="hello()"><i>大家好</i></a>
+
+  <select name="bingo">
+    <option value="false">false</option>
+    <option value="true">true</option>
+  </select>
+  <p><input type='submit' value='送出表單'></p>
+</form>
+</section>
+<aside>
+</aside>
+</article>
+</body>
+<footer>
+</footer>
+</html>

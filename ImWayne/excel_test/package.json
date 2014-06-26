@@ -1,0 +1,13 @@
+{
+  "name": "node-api",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.0.0",
+    "mongoose": "~3.6.13",
+    "body-parser": "~1.0.1",
+    "consolidate":"0.8.0",
+    "swig": "~0.13.5",
+    "excel-export": "0.3.11",
+    "xss": "~0.1.9"
+  }
+}

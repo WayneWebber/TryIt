@@ -5,8 +5,16 @@ var bodyParser = require("body-parser");
 var cons = require('consolidate');
 var nodeExcel = require('excel-export');
 var xss = require('xss');
-var html = xss('<script>alert("xss");</script>');
-console.log(html);
+function tagfilter ( source ){
+  var html = xss(source, {
+    // whiteList:          {a:['href']},        // 白名單為空,表示過濾所有tag
+    whiteList:          [],        // 白名單為空,表示過濾所有tag
+    stripIgnoreTag:     true,      // 過濾所有非白名單tag的HTML
+    stripIgnoreTagBody: ['script'] // script tag，需要過濾tag中間的內容
+  });
+  return html;
+}
+
 
 app.engine('html', cons.swig);
 app.set('view engine', 'html');
@@ -46,45 +54,54 @@ app.post('/redirect', function(req, res){
   }else{
     count = 1;
   }
-  var now = Math.floor(+new Date() / 1000);
-  var test = new datadetial(
+  var now = Math.floor(+new Date() / 1000);//當前時間
+  var gameplayerdata = new datadetial(
     { count: count,
-      name: req.body.name,
-      _id: req.body.id,
-      tel: req.body.tel,
-      add: req.body.add,
-      mail: req.body.mail,
+      name: tagfilter(req.body.name),
+      _id: tagfilter(req.body.id),
+      tel: tagfilter(req.body.tel),
+      add: tagfilter(req.body.add),
+      mail: tagfilter(req.body.mail),
       updated_at : now
     }
   );
-//儲存資料庫
-  test.save(function (err) {
-    if (err) {
-      console.log('can not writing into mongodb');
-      datadetial.find({'_id':req.body.id} ,function(err, docs) {
-        var addcount;
-        //找出每一個id的統計數字
-        for(var idx in docs){
-            var doc = docs[idx];
-            addcount = doc.count;
-        }
-        var rewrite = 1;
-        if('true' == req.body.bingo){
-          console.dir('bingo is true');
-          rewrite = 3;
-        }
-        console.dir(rewrite);
-        test.update({count: addcount+rewrite},function(err){
-          if (err) {
-            console.log('err')
+
+  var pattern = /^[a-z](1|2)\d{8}$/i;//身分證正規化
+  var regex = new RegExp(pattern);
+
+  if (regex.test(req.body.id)) {
+    //儲存資料庫
+    gameplayerdata.save(function (err) {
+      //輸入重複身分證要去找id並將count次數去做處理
+      if (err) {
+        console.log('can not writing into mongodb or repeat id ');
+        datadetial.find({'_id':req.body.id} ,function(err, docs) {
+          var addcount;
+          //找出每一個id的統計數字
+          for(var idx in docs){
+              var doc = docs[idx];
+              addcount = doc.count;
           }
+          var rewrite = 1;
+          if('true' == req.body.bingo){
+            console.dir('bingo is true');
+            rewrite = 3;
+          }
+          console.dir(rewrite);
+          gameplayerdata.update({count: addcount+rewrite},function(err){
+            if (err) {
+              console.log('err')
+            }
+          });
         });
-      });
-    }
-    else{
-    console.log('success writing into mondodb');
-    }
-  });
+      }
+      else{
+      console.log('success writing into mondodb');
+      }
+    });
+  }else{
+      console.log('身分證不符合正規化格式,資料將不會儲存');
+  }
 //寫入end
     res.redirect('/');
 });

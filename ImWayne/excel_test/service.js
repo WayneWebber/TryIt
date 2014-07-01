@@ -44,6 +44,9 @@ var port = process.env.PORT || 8080; // set our port
 app.get('/', function(req, res){
   res.render('html5');
 });
+app.get('/download', function(req, res){
+  res.render('excel_button');
+});
 
 app.post('/redirect', function(req, res){
 //寫入start
@@ -87,7 +90,6 @@ app.post('/redirect', function(req, res){
             console.dir('bingo is true');
             rewrite = 3;
           }
-          console.dir(rewrite);
           gameplayerdata.update({count: addcount+rewrite},function(err){
             if (err) {
               console.log('err')
@@ -104,6 +106,7 @@ app.post('/redirect', function(req, res){
   }
 //寫入end
     res.redirect('/');
+    // res.send(true);
 });
 
 // excel export

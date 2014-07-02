@@ -2,10 +2,10 @@ var express = require('express');
 var app = express();
 var gm = require('./resize');
 var url = require('url');
-// app.use(express.static(__dirname + '/imgs'));
+var md5 = require('MD5');
+app.use(express.static(__dirname + '/imgs'));
 
-app.get('*', function (req, res){
-	
+app.get('/', function (req, res){
 	var w = req.query.w;
 	var h = req.query.h;
 	var q = req.query.q;
@@ -13,10 +13,13 @@ app.get('*', function (req, res){
 	var targetImg = '?w=' + w + '&h=' + h + '&q=' + q + '&src=' + src;
 	src = url.parse(src);
 	src = src.href.replace('%20', '+');
-	gm.gmResize(src, w, h, q, targetImg);
-	// var doc = gm.gmResize(src, w, h, q, targetImg) ? gm.gmResize(src, w, h, q, targetImg) :'hello';
-	// res.send(doc);
-
+	if( gm.checkFile(md5(src)) ){
+		return res.sendfile('imgs/' + md5(original) + '.jpg');
+	}else{
+		gm.gmResize(src, w, h, q, res);
+	}
 });
 
 app.listen(3000);
+console.log()
+console.log('3000 is start!!')

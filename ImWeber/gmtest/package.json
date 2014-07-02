@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "gm": "^1.16.0",
-    "express": "^4.4.4"
+    "express": "^4.4.4",
+    "MD5": "^1.2.1"
   }
 }

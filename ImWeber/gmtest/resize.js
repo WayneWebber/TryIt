@@ -1,6 +1,13 @@
 var gm = require('gm');
 var md5 = require('MD5');
 var fs = require('fs');
+var cheerio = require("cheerio");
+// var emitter = require("events").EventEmitter;
+// evt = new emitter();
+var EventEmitter = require('events').EventEmitter,
+    evt = new EventEmitter();
+var h1;//倍數
+var w1;//倍數
 /**
 一個縮圖的api
 
@@ -13,14 +20,42 @@ var fs = require('fs');
 @return {String} memcached 的 key
 */
 module.exports.gmResize = function ( original, w, h, q, res ){
+
+  gm(original).size({bufferStream:true},function(err,size){
+    if(err){
+      console.info(err)
+    }else{
+      originalw = size.width;
+      originalh = size.height;
+      evt.emit('resize');
+      return  originalw,originalh;
+    }
+  // res.originalw.width = size.width;
+
+   });
+
+
 	var exInt = /^\d+$/; //數字驗證
   w = exInt.test(w) ? w : null;
   h = exInt.test(h) ? h : null;
   q = exInt.test(q) ? q : 80;
-  console.dir(original)
+  console.dir(w + '輸入寬度');
+  console.dir(h + '輸入長度');
+  evt.once('resize', function() {
+    console.log(originalw+'原始圖寬度');
+    console.log(originalh+'原始圖高度');
+    w1 = w/originalw;
+    h1 = h/originalh;
+    evt.emit('go');
+
+
+});
+evt.once('go', function() {
+  console.dir(h1);
+  console.dir(w1);
   if (null == w && null == h) {
     return   gm( original )
-    .normalize()
+    .normalize()//原始圖的尺寸
     .quality(q)
     .noProfile()
     .write( 'imgs/' + md5(original) + '.' + original.split(".").pop(), function(err){
@@ -28,28 +63,70 @@ module.exports.gmResize = function ( original, w, h, q, res ){
           console.log(err);
           return res.send('死掉了 別再按了好嗎...')
       }
-      console.info("ok");
+      console.info("原始尺寸ok");
 
       return res.sendfile('imgs/' + md5(original) + '.jpg')
     }
-  );
+    );
     // original;
-  }
-
+  };
+  if (null != w && null == h) {
+  h = originalh*w1;
+  console.dir(h);
   gm( original )
-    .resize(w, h/*, "!" */)
+    .resize(w,h,'!')
     .quality(q)
     .noProfile()
     .write( 'imgs/' + md5(original) + '.' + original.split(".").pop(), function(err){
       if (err){
-          console.log(err);
-          return res.send('死掉了 別再按了好嗎...')
+        console.log(err);
+        return res.send('死掉了 別再按了好嗎...')
       }
       console.info("ok");
 
       return res.sendfile('imgs/' + md5(original) + '.jpg')
     }
-	);
+	 );
+  };
+  if (null == w && null != h) {
+    w = originalw*h1;
+    console.dir(w);
+    // var receiveh= h;
+    // if(receiveh>3000){
+    //   receiveh=1280;
+    //   console.dir(123456)
+    // };
+  gm( original )
+    .resize(w,h,'!')
+    .quality(q)
+    .noProfile()
+    .write( 'imgs/' + md5(original) + '.' + original.split(".").pop(), function(err){
+      if (err){
+        console.log(err);
+        return res.send('死掉了 別再按了好嗎...')
+      }
+      console.info("ok");
+
+      return res.sendfile('imgs/' + md5(original) + '.jpg')
+    }
+   );
+  };
+  if ( w && h) {
+  gm( original )
+    .resize(w,h)
+    .quality(q)
+    .noProfile()
+    .write( 'imgs/' + md5(original) + '.' + original.split(".").pop(), function(err){
+      if (err){
+        console.log(err);
+        return res.send('死掉了 別再按了好嗎...')
+      }
+      console.info("ok");
+
+      return res.sendfile('imgs/' + md5(original) + '.jpg')
+    }
+   );
+  };});
 };
 
 /**

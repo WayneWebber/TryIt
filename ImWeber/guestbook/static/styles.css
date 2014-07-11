@@ -1,0 +1,37 @@
+body {
+  font-family: helvetica, arial, sans-serif
+}
+
+#entry-list {
+  list-style-type: none;
+  margin: 20px 0px;
+  padding: 0;
+}
+
+#entry-list li {
+  padding: 15px 0px 15px 10px;
+}
+
+#entry-list li:nth-child(odd) {
+  background: #ccc;
+}
+
+.entry-message {
+  font-size: 24px;
+}
+
+.entry-name {
+  font-size: 12px;
+  display:inline;
+  margin-left: 2px;
+}
+
+.entry-date {
+  font-size: 12px;
+  display:inline;
+  margin-left: 10px;
+  color: gray;
+}
+
+
+

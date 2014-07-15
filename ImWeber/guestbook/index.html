@@ -1,0 +1,41 @@
+<html>
+
+<head>
+  <title>簡易留言板Guestbook</title>
+
+  <link href="/static/styles.css" media="all" rel="stylesheet" type="text/css"/>
+  <meta content='300; URL=/' http-equiv='Refresh'/>
+  <meta charset="utf-8">
+  <script src="/static/jquery-1.11.1.min.js"></script>
+  <script src="/static/underscore.js"></script>
+  <script src="/static/backbone.js"></script>
+  <script src="client.js"></script>
+</head>
+
+<body>
+
+  <h1>留言板</h1>
+
+  <input id="new-entry-name" placeholder="Name" type="text"/ autofocus autocomplete="on"> <br/>
+  <textarea id="new-entry-message" placeholder="Message" type="text" autocomplete="on"></textarea> <br/>
+  <button id="new-entry-submit">Add</button>
+
+  <div id="entries">
+    <ul id="entry-list">
+    </ul>
+  </div>
+
+
+  <script type="text/template" id="entry-template">
+    <div class="entry-message"><%= message %></div>
+    <div class="entry-name"><%= name %></div>
+    <div class="entry-date"><%= date.getMonth() + 1 %>/<%= date.getDate() %>/<%= date.getYear()+1900 %> <%= date.getHours() %>:<%= date.getMinutes() %></div>
+  </script>
+
+</body>
+<script>
+  $('#new-entry-submit').click(function() {
+    location.reload();
+  });
+</script>
+</html>

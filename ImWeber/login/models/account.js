@@ -1,13 +1,13 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    passportLocalMongoose = require('passport-local-mongoose');
-
+var mongoose = require( 'mongoose' );
+var Schema   = mongoose.Schema;
+ 
 var Account = new Schema({
-    nickname: String,
-    birthdate: Date,
-    aaa: Number
+		nid					: Number,
+    username    : String,
+    password    : String,
+    email    : String,
+    updated_at : Date
 });
-
-Account.plugin(passportLocalMongoose);
-
-module.exports = mongoose.model('Account', Account);
+ 
+mongoose.model( 'account', Account );
+mongoose.connect( 'mongodb://localhost/guestbook' );

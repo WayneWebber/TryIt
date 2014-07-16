@@ -1,0 +1,9 @@
+<% include header.ejs %>
+
+<% if (!user) { %>
+	<script> document.location.href="/login" </script>
+<% } else { %>
+	<h2>Hello, <%= user.username %>.</h2>
+<% } %>
+
+<% include footer.ejs %>
